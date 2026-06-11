@@ -1,0 +1,626 @@
+/* ============================================================
+   For Dad — A Memory Box
+   A handmade scrapbook landing page, brought to life.
+   ============================================================ */
+
+:root {
+  --cherry: #8E1825;
+  --cherry-deep: #6e1019;
+  --pink: #F6D6E1;
+  --pink-soft: #fbe7ee;
+  --cream: #F8F2E8;
+  --butter: #FFEDAD;
+  --columbia: #C8D9EC;
+  --choco: #3D2722;
+  --ink: #4a2f2a;
+  --paper-shadow: rgba(61, 39, 34, 0.28);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  font-family: 'Cormorant Garamond', serif;
+  color: var(--choco);
+  overflow-x: hidden;
+}
+
+body {
+  position: relative;
+  min-height: 100vh;
+  background: var(--cherry);
+}
+
+/* ---------- Striped wrapping-paper background ---------- */
+.bg-stripes {
+  position: fixed;
+  inset: -10%;
+  z-index: -3;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      #8E1825 0px,
+      #8E1825 26px,
+      #a8344a 27px,
+      #f0bcd0 30px,
+      #f6d6e1 46px,
+      #f0bcd0 62px,
+      #a8344a 65px,
+      #8E1825 66px,
+      #8E1825 92px
+    );
+  background-size: 92px 100%;
+  filter: saturate(0.95);
+}
+
+/* ---------- Paper grain texture ---------- */
+.bg-grain {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  opacity: 0.5;
+  mix-blend-mode: multiply;
+  background-image:
+    radial-gradient(rgba(61,39,34,0.10) 1px, transparent 1.4px),
+    radial-gradient(rgba(255,255,255,0.10) 1px, transparent 1.4px);
+  background-size: 4px 4px, 7px 7px;
+  background-position: 0 0, 2px 3px;
+}
+
+/* gentle vignette for nostalgic depth */
+.bg-vignette {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 50% 42%, transparent 45%, rgba(61,39,34,0.28) 100%);
+}
+
+/* ============================================================
+   Floating decorative objects
+   ============================================================ */
+.floaties { position: fixed; inset: 0; z-index: 2; pointer-events: none; }
+
+.floaty {
+  position: absolute;
+  display: inline-block;
+  will-change: transform;
+  animation-name: drift;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  filter: drop-shadow(0 4px 5px rgba(61,39,34,0.25));
+  opacity: 0.92;
+}
+
+@keyframes drift {
+  0%   { transform: translate(0,0) rotate(0deg); }
+  25%  { transform: translate(10px, -16px) rotate(6deg); }
+  50%  { transform: translate(-8px, -28px) rotate(-5deg); }
+  75%  { transform: translate(-12px, -12px) rotate(4deg); }
+  100% { transform: translate(0,0) rotate(0deg); }
+}
+
+/* ---------- Falling petals ---------- */
+.petals { position: fixed; inset: 0; z-index: 3; pointer-events: none; overflow: hidden; }
+.petal {
+  position: absolute;
+  top: -6vh;
+  font-size: 1.2rem;
+  will-change: transform;
+  animation: petal-fall linear infinite;
+  opacity: 0.85;
+}
+@keyframes petal-fall {
+  0%   { transform: translateY(-10vh) translateX(0) rotate(0deg); opacity: 0; }
+  10%  { opacity: 0.9; }
+  90%  { opacity: 0.9; }
+  100% { transform: translateY(110vh) translateX(40px) rotate(360deg); opacity: 0; }
+}
+
+/* ============================================================
+   The desk (landing scene)
+   ============================================================ */
+.desk {
+  position: relative;
+  z-index: 5;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 4vh 5vw 10vh;
+}
+
+/* ---------- Hero postcard ---------- */
+.hero-postcard {
+  position: relative;
+  margin: 5vh auto 2vh;
+  max-width: 560px;
+  width: 90%;
+  padding: 38px 42px 30px;
+  text-align: center;
+  background:
+    linear-gradient(180deg, #fffdf6 0%, var(--cream) 100%);
+  color: var(--ink);
+  border-radius: 4px;
+  transform: rotate(-1.6deg);
+  box-shadow:
+    0 1px 0 #fff inset,
+    0 14px 30px -8px var(--paper-shadow),
+    0 3px 6px rgba(61,39,34,0.2);
+  will-change: transform;
+}
+/* torn / deckled paper edge feel */
+.hero-postcard::before {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  border: 1px dashed rgba(142,24,37,0.35);
+  border-radius: 3px;
+  pointer-events: none;
+}
+
+.pin {
+  position: absolute;
+  top: -10px; left: 50%;
+  width: 18px; height: 18px;
+  transform: translateX(-50%);
+  background: radial-gradient(circle at 35% 30%, #ff8fa6, var(--cherry) 70%);
+  border-radius: 50%;
+  box-shadow: 0 3px 5px rgba(61,39,34,0.4), 0 0 0 2px rgba(255,255,255,0.4) inset;
+  z-index: 2;
+}
+
+.hero-stamp {
+  position: absolute;
+  top: 14px; right: 16px;
+  width: 54px; height: 62px;
+  display: grid;
+  place-items: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 600;
+  font-size: 0.7rem;
+  line-height: 1;
+  text-align: center;
+  color: var(--cherry-deep);
+  background: var(--pink-soft);
+  border: 2px solid var(--cherry);
+  border-radius: 3px;
+  transform: rotate(7deg);
+  box-shadow: 0 2px 4px rgba(61,39,34,0.25);
+  /* perforated stamp edge */
+  outline: 3px dotted var(--pink-soft);
+  outline-offset: 0;
+}
+
+.postmark {
+  font-family: 'Caveat', cursive;
+  color: var(--cherry);
+  letter-spacing: 2px;
+  font-size: 1.05rem;
+  margin: 0 0 4px;
+  opacity: 0.85;
+}
+
+.hero-title {
+  font-family: 'Parisienne', cursive;
+  font-weight: 400;
+  font-size: clamp(1.7rem, 5.2vw, 2.9rem);
+  line-height: 1.15;
+  margin: 4px 0 10px;
+  color: var(--cherry-deep);
+  text-shadow: 0 1px 0 #fff, 0 2px 3px rgba(142,24,37,0.18);
+}
+
+.hero-sub {
+  font-family: 'Parisienne', cursive;
+  font-size: clamp(1.3rem, 3.6vw, 1.9rem);
+  margin: 0 0 16px;
+  color: var(--cherry);
+}
+
+.hero-cta {
+  font-family: 'Caveat', cursive;
+  font-size: 1.35rem;
+  margin: 6px 0 0;
+  color: var(--choco);
+  animation: nudge 2.4s ease-in-out infinite;
+}
+@keyframes nudge {
+  0%,100% { transform: translateY(0); }
+  50%     { transform: translateY(5px); }
+}
+
+/* ============================================================
+   Envelopes
+   ============================================================ */
+.envelopes {
+  position: relative;
+  z-index: 6;
+  margin-top: 3vh;
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(18px, 5vw, 64px);
+  align-items: center;
+  justify-content: center;
+}
+
+.envelope {
+  --w: clamp(220px, 26vw, 290px);
+  position: relative;
+  width: var(--w);
+  height: calc(var(--w) * 0.66);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  background: transparent;
+  transform: rotate(var(--rot));
+  transition: transform 0.45s cubic-bezier(.2,.8,.25,1), filter 0.4s;
+  filter: drop-shadow(0 12px 18px rgba(61,39,34,0.32));
+  animation: wiggle 6s ease-in-out infinite;
+  font-family: inherit;
+}
+.env-2 { animation-delay: 2s; }
+.env-3 { animation-delay: 4s; }
+
+@keyframes wiggle {
+  0%, 92%, 100% { transform: rotate(var(--rot)); }
+  94% { transform: rotate(calc(var(--rot) + 2.5deg)); }
+  96% { transform: rotate(calc(var(--rot) - 2.5deg)); }
+  98% { transform: rotate(calc(var(--rot) + 1.2deg)); }
+}
+
+.envelope:hover,
+.envelope:focus-visible {
+  transform: rotate(var(--rot)) translateY(-16px) scale(1.04);
+  filter: drop-shadow(0 26px 30px rgba(61,39,34,0.4));
+  outline: none;
+  animation-play-state: paused;
+}
+
+/* envelope body (the paper pocket) */
+.env-body {
+  position: absolute;
+  inset: 0;
+  border-radius: 7px;
+  background:
+    linear-gradient(135deg, #fbf4e6 0%, #efe2c9 100%);
+  box-shadow:
+    inset 0 0 0 1px rgba(61,39,34,0.12),
+    inset 0 -8px 18px rgba(61,39,34,0.10);
+}
+/* aged paper speckle on the envelope */
+.env-body::after {
+  content: "";
+  position: absolute; inset: 0;
+  border-radius: 7px;
+  background-image: radial-gradient(rgba(120,80,40,0.10) 1px, transparent 2px);
+  background-size: 9px 9px;
+  opacity: 0.6;
+}
+/* the lower V-folds of the envelope */
+.env-body::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 7px;
+  background:
+    linear-gradient(45deg, transparent 49.5%, rgba(61,39,34,0.10) 50%, transparent 50.5%),
+    linear-gradient(-45deg, transparent 49.5%, rgba(61,39,34,0.10) 50%, transparent 50.5%);
+}
+
+/* envelope flap (top triangle) */
+.env-flap {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 58%;
+  background: linear-gradient(135deg, #f3e7cf 0%, #e6d4b4 100%);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  transform-origin: top center;
+  transition: transform 0.6s cubic-bezier(.4,0,.2,1), filter 0.6s;
+  box-shadow: 0 4px 8px rgba(61,39,34,0.16);
+  z-index: 4;
+}
+.envelope.opening .env-flap {
+  transform: rotateX(180deg);
+  filter: brightness(0.96);
+  z-index: 1;
+}
+
+/* address handwriting */
+.env-address {
+  position: absolute;
+  left: 14%;
+  top: 60%;
+  transform: translateY(-50%);
+  text-align: left;
+  z-index: 3;
+  pointer-events: none;
+  transition: opacity 0.4s;
+}
+.addr-line {
+  display: block;
+  font-family: 'Caveat', cursive;
+  font-size: 1.5rem;
+  color: var(--ink);
+  line-height: 1.1;
+}
+.addr-sub {
+  display: block;
+  font-family: 'Indie Flower', cursive;
+  font-size: 0.98rem;
+  color: var(--cherry);
+  margin-top: 4px;
+  max-width: 78%;
+}
+.envelope.opening .env-address { opacity: 0; }
+
+/* postage stamp */
+.env-stamp {
+  position: absolute;
+  top: 9px; right: 12px;
+  width: 38px; height: 44px;
+  display: grid; place-items: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 600;
+  font-size: 0.72rem;
+  color: var(--cherry-deep);
+  background: repeating-linear-gradient(45deg, #f7d3df, #f7d3df 6px, #f1bccd 6px, #f1bccd 12px);
+  border: 1.5px solid #fff;
+  outline: 2px dotted #efe2c9;
+  border-radius: 2px;
+  transform: rotate(6deg);
+  z-index: 5;
+  box-shadow: 0 1px 3px rgba(61,39,34,0.3);
+}
+.env-postmark {
+  position: absolute;
+  top: 14px; right: 54px;
+  font-size: 1.5rem;
+  color: rgba(142,24,37,0.5);
+  transform: rotate(-12deg);
+  z-index: 5;
+}
+
+/* wax seal at the flap point */
+.wax-seal {
+  position: absolute;
+  left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  width: 38px; height: 38px;
+  display: grid; place-items: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #fbe7ee;
+  background: radial-gradient(circle at 35% 30%, #b8324a, var(--cherry) 60%, var(--cherry-deep) 100%);
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(61,39,34,0.45), inset 0 0 6px rgba(0,0,0,0.3);
+  z-index: 6;
+  transition: opacity 0.3s, transform 0.5s;
+}
+.wax-seal::after {
+  content: "";
+  position: absolute; inset: 3px;
+  border: 1px solid rgba(255,255,255,0.35);
+  border-radius: 50%;
+}
+.envelope.opening .wax-seal { opacity: 0; transform: translate(-50%,-50%) scale(0.4); }
+
+/* tape pieces */
+.tape {
+  position: absolute;
+  width: 56px; height: 22px;
+  background: rgba(255,237,173,0.55);
+  border-left: 1px dashed rgba(255,255,255,0.5);
+  border-right: 1px dashed rgba(255,255,255,0.5);
+  box-shadow: 0 1px 2px rgba(61,39,34,0.15);
+  z-index: 7;
+}
+.tape-tl { top: -8px; left: -10px; transform: rotate(-38deg); }
+.tape-tr { top: -8px; right: -10px; transform: rotate(38deg); }
+
+/* a little letter peeking out when opening */
+.envelope::after {
+  content: "";
+  position: absolute;
+  left: 8%; right: 8%;
+  top: 14%;
+  height: 0;
+  background: linear-gradient(180deg, #fffdf7, #f3ead6);
+  border-radius: 3px 3px 0 0;
+  box-shadow: 0 -2px 6px rgba(61,39,34,0.2);
+  z-index: 2;
+  transition: height 0.55s ease, top 0.55s ease;
+}
+.envelope.opening::after {
+  height: 64%;
+  top: -34%;
+}
+
+/* ============================================================
+   Hidden doodles
+   ============================================================ */
+.hidden-doodles { position: fixed; inset: 0; z-index: 4; pointer-events: none; }
+.doodle {
+  position: absolute;
+  font-size: 1.5rem;
+  opacity: 0.22;
+  cursor: help;
+  pointer-events: auto;
+  filter: grayscale(0.3);
+  transition: opacity 0.35s, transform 0.35s, filter 0.35s;
+}
+.doodle:hover {
+  opacity: 1;
+  filter: grayscale(0) drop-shadow(0 4px 6px rgba(61,39,34,0.35));
+  transform: scale(1.5) rotate(-6deg);
+}
+
+/* whisper tooltip */
+.whisper {
+  position: fixed;
+  z-index: 30;
+  padding: 6px 14px;
+  font-family: 'Caveat', cursive;
+  font-size: 1.15rem;
+  color: var(--ink);
+  background: var(--butter);
+  border-radius: 14px 14px 14px 2px;
+  box-shadow: 0 6px 14px rgba(61,39,34,0.3);
+  transform: translate(-50%, -130%) scale(0.8);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s, transform 0.25s;
+  white-space: nowrap;
+}
+.whisper.show { opacity: 1; transform: translate(-50%, -130%) scale(1); }
+
+/* ============================================================
+   Letter overlay
+   ============================================================ */
+.letter-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5vh 4vw;
+  background: rgba(61,39,34,0.55);
+  backdrop-filter: blur(2px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s ease, visibility 0.5s;
+}
+.letter-overlay.open { opacity: 1; visibility: visible; }
+
+.letter-close {
+  position: absolute;
+  top: 4vh; right: 5vw;
+  font-family: 'Caveat', cursive;
+  font-size: 1.2rem;
+  color: var(--cream);
+  background: rgba(142,24,37,0.85);
+  border: 1.5px solid rgba(255,255,255,0.4);
+  border-radius: 20px;
+  padding: 6px 18px;
+  cursor: pointer;
+  z-index: 2;
+  transition: transform 0.25s, background 0.25s;
+}
+.letter-close:hover { transform: scale(1.06) rotate(-1deg); background: var(--cherry); }
+
+.letter-paper {
+  position: relative;
+  width: min(640px, 92vw);
+  max-height: 88vh;
+  overflow-y: auto;
+  padding: 48px clamp(26px, 5vw, 56px) 42px;
+  background:
+    repeating-linear-gradient(180deg, transparent 0 31px, rgba(142,24,37,0.07) 31px 32px),
+    linear-gradient(180deg, #fffdf6, var(--cream));
+  color: var(--ink);
+  border-radius: 4px;
+  box-shadow: 0 30px 60px -10px rgba(0,0,0,0.5);
+  transform: translateY(40px) rotate(-0.6deg);
+  transition: transform 0.6s cubic-bezier(.2,.85,.25,1);
+  /* red margin line like notebook paper */
+  border-left: 2px solid rgba(142,24,37,0.25);
+}
+.letter-overlay.open .letter-paper { transform: translateY(0) rotate(-0.6deg); }
+
+.letter-tape-top {
+  position: absolute;
+  top: -14px; left: 50%;
+  width: 110px; height: 30px;
+  transform: translateX(-50%) rotate(-2deg);
+  background: rgba(200,217,236,0.55);
+  border-left: 1px dashed rgba(255,255,255,0.6);
+  border-right: 1px dashed rgba(255,255,255,0.6);
+  box-shadow: 0 2px 5px rgba(61,39,34,0.18);
+}
+
+.letter-head { text-align: center; margin-bottom: 18px; }
+.letter-eyebrow {
+  font-family: 'Indie Flower', cursive;
+  font-size: 1.1rem;
+  color: var(--cherry);
+  margin: 0 0 6px;
+}
+.letter-from {
+  font-family: 'Parisienne', cursive;
+  font-weight: 400;
+  font-size: clamp(2rem, 6vw, 2.8rem);
+  margin: 0;
+  color: var(--cherry-deep);
+  text-shadow: 0 1px 0 #fff;
+}
+.letter-date {
+  font-family: 'Caveat', cursive;
+  font-size: 1.1rem;
+  color: var(--choco);
+  opacity: 0.7;
+  margin: 4px 0 0;
+}
+
+.letter-body {
+  font-family: 'Caveat', cursive;
+  font-size: clamp(1.3rem, 3.4vw, 1.6rem);
+  line-height: 1.55;
+  color: #4a2f2a;
+}
+.letter-body p { margin: 0 0 16px; }
+.letter-body .ps {
+  font-family: 'Indie Flower', cursive;
+  font-size: 1.15rem;
+  color: var(--cherry);
+  margin-top: 22px;
+}
+
+.letter-foot {
+  margin-top: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px dashed rgba(142,24,37,0.3);
+  padding-top: 14px;
+}
+.letter-signoff {
+  font-family: 'Parisienne', cursive;
+  font-size: 1.6rem;
+  color: var(--cherry-deep);
+}
+.letter-doodle { font-size: 1.8rem; }
+
+/* ============================================================
+   Footer credit on the desk
+   ============================================================ */
+.desk::after {
+  content: "made in secret, with love — Anjalee · Pratibha · Bhaskar";
+  position: relative;
+  margin-top: auto;
+  padding-top: 6vh;
+  font-family: 'Indie Flower', cursive;
+  font-size: 1rem;
+  color: rgba(248,242,232,0.85);
+  text-shadow: 0 1px 2px rgba(61,39,34,0.5);
+  text-align: center;
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+@media (max-width: 720px) {
+  .envelopes { flex-direction: column; gap: 30px; margin-top: 1vh; }
+  .envelope { --w: clamp(240px, 80vw, 320px); animation: none; }
+  .floaty { font-size: 1.4rem !important; }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .floaty, .petal, .envelope, .hero-cta { animation: none !important; }
+}
