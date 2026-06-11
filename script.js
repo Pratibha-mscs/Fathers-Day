@@ -9,7 +9,7 @@
   /* ---------- Letter contents (revealed after opening) ---------- */
   const LETTERS = {
     anjalee: {
-      eyebrow: "💌 What I Never Said Out Loud",
+      eyebrow: "💌 The Words I Never Said",
       from: "From Anjalee",
       signoff: "— your Anjalee, always",
       doodle: "🦋",
