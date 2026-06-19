@@ -86,6 +86,55 @@ body.sb-locked { overflow: hidden; }
   100% { transform: translate(0,0) rotate(0deg); }
 }
 
+/* ---------- family photos as taped polaroids ---------- */
+.sb-photos { position: absolute; inset: 0; z-index: 7; pointer-events: none; }
+.sb-photo {
+  position: absolute;
+  width: clamp(112px, 11vw, 152px);
+  padding: 9px 9px 32px;
+  background: linear-gradient(180deg, #fffefa 0%, #f4ebd7 100%);
+  border-radius: 3px;
+  box-shadow: 0 12px 26px -6px rgba(20,10,14,0.5), 0 3px 8px rgba(20,10,14,0.3);
+  transform: rotate(var(--r, 0deg));
+  transform-origin: top center;
+  animation: sb-sway 6.5s ease-in-out infinite;
+  transition: translate 0.25s ease-out;
+  will-change: transform, translate;
+}
+.sb-photo img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  background: #e6d8bf;
+  border-radius: 1px;
+  box-shadow: inset 0 0 0 1px rgba(40,20,25,0.12);
+}
+.sb-photo figcaption {
+  position: absolute;
+  left: 0; right: 0; bottom: 9px;
+  text-align: center;
+  font-family: 'Caveat', cursive;
+  font-size: 1.05rem;
+  color: var(--ink, #4a2f2a);
+}
+/* washi tape across the top of each polaroid */
+.sb-photo::before {
+  content: "";
+  position: absolute;
+  top: -9px; left: 50%;
+  width: 58px; height: 20px;
+  transform: translateX(-50%) rotate(-3deg);
+  background: rgba(246,214,225,0.6);
+  border-left: 1px dashed rgba(255,255,255,0.6);
+  border-right: 1px dashed rgba(255,255,255,0.6);
+  box-shadow: 0 2px 4px rgba(40,20,25,0.18);
+}
+@keyframes sb-sway {
+  0%, 100% { transform: rotate(var(--r, 0deg)); }
+  50%      { transform: rotate(calc(var(--r, 0deg) + 2deg)) translateY(3px); }
+}
+
 /* ---------- hidden discoverable doodles ---------- */
 .sb-hidden { position: absolute; inset: 0; z-index: 6; pointer-events: none; }
 .sb-doodle {
@@ -464,6 +513,11 @@ body.sb-locked { overflow: hidden; }
 /* ============================================================
    Responsive
    ============================================================ */
+/* photos live in the wide side-margins; hide them when there isn't room */
+@media (max-width: 1040px) {
+  .sb-photos { display: none; }
+}
+
 @media (max-width: 720px) {
   .sb-nav { width: 46px; height: 46px; font-size: 1.8rem; }
   .sb-page { padding: 44px 30px 56px; }

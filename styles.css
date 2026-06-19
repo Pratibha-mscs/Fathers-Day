@@ -349,20 +349,23 @@ body {
 }
 .addr-line {
   display: block;
-  font-family: 'Caveat', cursive;
-  font-weight: 600;
-  font-size: 1.65rem;
+  font-family: 'Parisienne', cursive;
+  font-weight: 400;
+  font-size: 2.1rem;
   letter-spacing: 0.5px;
-  color: var(--ink);
-  line-height: 1.1;
+  color: var(--cherry-deep);
+  line-height: 1.05;
+  text-shadow: 0 1px 0 rgba(255,255,255,0.6);
 }
 .addr-sub {
   display: block;
-  font-family: 'Indie Flower', cursive;
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 600;
   font-size: 1.02rem;
+  letter-spacing: 0.6px;
   color: var(--cherry);
-  margin: 8px auto 0;
-  max-width: 92%;
+  margin: 9px auto 0;
+  max-width: 94%;
   line-height: 1.3;
 }
 .envelope.opening .env-address { opacity: 0; }
