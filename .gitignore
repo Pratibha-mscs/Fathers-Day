@@ -5,3 +5,5 @@ package-lock.json
 *.png
 shot.js
 dbg.js
+genphotos.js
+shotbook.js

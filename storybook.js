@@ -23,33 +23,17 @@
         { icon: "🌼", note: "the garden" }
       ],
       lines: [
-        "When I think about my childhood, I don't remember it in a straight line. I remember it in flashes. Tiny moments. Little scenes.",
-        "Snapshots that somehow stayed with me long after the days themselves disappeared.",
-        "And somehow, whenever I revisit those memories, you're always there.",
-        "Not always at the center. Not always the loudest person in the room. Sometimes just watching. Sometimes smiling. Sometimes making sure everyone else was happy.",
-        "But always there.",
-        "I remember running through gardens trying to catch butterflies. I would chase them with the kind of determination only a child can have — convinced that if I ran just a little faster, reached just a little farther, I'd finally catch one.",
-        "And somewhere nearby, there you were. Watching. Laughing. Letting me believe that catching butterflies was the most important mission in the world.",
-        "At the time, it felt ordinary. Now I realize those moments were never ordinary at all.",
-        "Because childhood isn't made of big events. It's made of small moments that feel safe enough to become memories. And you gave me so many of those.",
-        "I remember visiting your office. I remember feeling important because I got to see where Dad worked.",
-        "As a child, offices seemed mysterious — places where important people did important things. And the fact that my dad worked there made me feel proud in a way I didn't even know how to explain.",
-        "I would walk around looking at everything with wide eyes, secretly convinced that my father was probably the most important person in the building.",
-        "And honestly? A part of me still feels that way.",
-        "I remember the little gifts too. Especially the pink ones. Everything somehow ended up being pink. Pink bags. Pink stationery. Pink little trinkets.",
-        "Pink things that probably made absolutely no sense to anyone else. But somehow you always knew exactly what would make me smile.",
-        "Looking back now, I don't even remember most of the gifts themselves. What I remember is the thought behind them.",
-        "The way you paid attention. The way you noticed things. The way you remembered what your daughters liked.",
-        "Love is a strange thing. When we're young, we think it's something huge. Something dramatic. Something obvious.",
-        "But the older I get, the more I realize that love often hides inside very small things.",
-        "Inside someone remembering your favorite color. Inside someone bringing you something just because they thought of you. Inside someone standing nearby while you chase butterflies.",
-        "Before I understood sacrifice, before I understood responsibility, before I understood everything you gave up for us, I understood something much simpler.",
-        "I understood that I felt safe around you. I understood that life felt a little brighter when you were there.",
-        "And maybe that's why those memories still feel so warm.",
-        "Because when I look back, I don't just see butterflies. I don't just see pink gifts. I don't just see office visits.",
-        "I see a father quietly building a childhood that felt full of wonder. A father creating memories so naturally that his children didn't even realize they were being created. A father who made ordinary days feel special without ever trying to.",
-        "Some of the greatest expressions of love don't arrive with grand announcements. They arrive disguised as ordinary moments.",
-        "A walk in the garden. A visit to the office. A small pink gift. A father standing nearby.",
+        "When I think about my childhood, I don't remember it in a straight line. I remember it in flashes. Tiny moments. Little scenes that stayed with me long after the days themselves disappeared.",
+        "And somehow, whenever I revisit those memories, you're always there. Not always at the center. Sometimes just watching. Sometimes smiling. But always there.",
+        "I remember running through gardens trying to catch butterflies, convinced that if I ran just a little faster I'd finally catch one. And somewhere nearby, there you were. Watching. Laughing.",
+        "At the time, it felt ordinary. Now I realize those moments were never ordinary at all. Because childhood isn't made of big events. It's made of small moments that feel safe enough to become memories.",
+        "I remember visiting your office and feeling so important because I got to see where Dad worked — secretly convinced that my father was the most important person in the building. A part of me still feels that way.",
+        "I remember the little gifts too. Especially the pink ones. Pink bags, pink stationery, pink little trinkets that made no sense to anyone else. But you always knew exactly what would make me smile.",
+        "Looking back, I don't even remember most of the gifts themselves. What I remember is the thought behind them. The way you paid attention. The way you remembered what your daughters liked.",
+        "Love is a strange thing. When we're young, we think it's something huge and dramatic. But the older I get, the more I realize that love often hides inside very small things.",
+        "Inside someone standing nearby while you chase butterflies. Inside someone taking you to work because they want you to be part of their world.",
+        "Before I understood sacrifice or responsibility, I understood something simpler. I understood that I felt safe around you. I understood that life felt a little brighter when you were there.",
+        "Because when I look back, I don't just see butterflies, or pink gifts, or office visits. I see a father quietly building a childhood that felt full of wonder — making ordinary days feel special without ever trying to.",
         "And somehow, those ordinary moments became some of the most extraordinary memories of my life."
       ]
     },
@@ -338,6 +322,17 @@
     }
   ];
 
+  /* Family photos pinned as polaroids around the book.
+     Drop your images into a /photos folder using these file names.
+     Captions are easy to edit here. */
+  const PHOTOS = [
+    { src: "photos/1.jpg", cap: "you & me ✿",        top: "12%", left: "3%",  rot: -7 },
+    { src: "photos/2.jpg", cap: "all of us, home",   top: "41%", left: "1.5%", rot:  5 },
+    { src: "photos/3.jpg", cap: "where it began",    top: "69%", left: "4%",   rot: -4 },
+    { src: "photos/4.jpg", cap: "the mountain days", top: "17%", left: "85%",  rot:  6 },
+    { src: "photos/5.jpg", cap: "still going ✦",      top: "63%", left: "84%",  rot: -6 }
+  ];
+
   /* universal slow-floating scrapbook objects, present on every page */
   const BASE_FLOATIES = ["⭐", "🦋", "✨", "🌼", "🎀", "☁️", "💌", "🌷", "📸", "🎈"];
 
@@ -365,7 +360,7 @@
      DOM scaffolding (built once, on first open)
   ------------------------------------------------------------ */
   let root, stage, pageEl, measurer, progressEl, bookmarkEl,
-      floatiesEl, petalsEl, hiddenEl, whisperEl, prevBtn, nextBtn;
+      floatiesEl, petalsEl, hiddenEl, whisperEl, prevBtn, nextBtn, photosEl;
   let built = false;
 
   let pages = [];        // flattened list of page descriptors
@@ -383,6 +378,7 @@
       '<div class="sb-vignette" aria-hidden="true"></div>',
       '<div class="sb-petals" aria-hidden="true"></div>',
       '<div class="sb-floaties" aria-hidden="true"></div>',
+      '<div class="sb-photos" aria-hidden="true"></div>',
       '<div class="sb-hidden" aria-hidden="true"></div>',
       '<button class="sb-close" type="button" aria-label="Close the book">✕ close the book</button>',
       '<div class="sb-stage">',
@@ -405,6 +401,7 @@
     progressEl = root.querySelector("#sbProgress");
     bookmarkEl = root.querySelector(".sb-bookmark");
     floatiesEl = root.querySelector(".sb-floaties");
+    photosEl   = root.querySelector(".sb-photos");
     petalsEl   = root.querySelector(".sb-petals");
     hiddenEl   = root.querySelector(".sb-hidden");
     whisperEl  = root.querySelector("#sbWhisper");
@@ -435,7 +432,36 @@
       rt = setTimeout(repaginate, 250);
     });
 
+    buildPhotos();
     built = true;
+  }
+
+  /* taped polaroids of family photos scattered around the book */
+  function buildPhotos() {
+    photosEl.innerHTML = "";
+    PHOTOS.forEach(function (ph, i) {
+      const fig = document.createElement("figure");
+      fig.className = "sb-photo";
+      fig.style.top = ph.top;
+      fig.style.left = ph.left;
+      fig.style.setProperty("--r", ph.rot + "deg");
+      fig.dataset.depth = (0.3 + (i % 3) * 0.18).toFixed(2);
+      fig.style.animationDelay = (-i * 1.3) + "s";
+
+      const img = document.createElement("img");
+      img.src = ph.src;
+      img.alt = ph.cap;
+      img.loading = "lazy";
+      // if a photo file isn't there yet, hide that polaroid gracefully
+      img.addEventListener("error", function () { fig.style.display = "none"; });
+
+      const cap = document.createElement("figcaption");
+      cap.textContent = ph.cap;
+
+      fig.appendChild(img);
+      fig.appendChild(cap);
+      photosEl.appendChild(fig);
+    });
   }
 
   /* ------------------------------------------------------------
@@ -692,6 +718,11 @@
       const depth = parseFloat(el.dataset.depth) || 1;
       el.style.translate = (-px * 16 * depth).toFixed(1) + "px " +
                            (-py * 12 * depth).toFixed(1) + "px";
+    });
+    [].forEach.call(photosEl.children, function (el) {
+      const depth = parseFloat(el.dataset.depth) || 0.4;
+      el.style.translate = (-px * 14 * depth).toFixed(1) + "px " +
+                           (-py * 10 * depth).toFixed(1) + "px";
     });
   }
 
