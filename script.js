@@ -96,9 +96,16 @@
     const key = envelope.dataset.key;
     envelope.classList.add("opening");
 
-    // Let the envelope animation play, then reveal the letter overlay.
+    // Let the envelope physically open and the letter peek out first.
     const delay = prefersReduced ? 0 : 520;
     window.setTimeout(function () {
+      // Anjalee's letter unfolds into the immersive memory storybook.
+      if (key === "anjalee" && window.Storybook) {
+        window.Storybook.open();
+        // re-seal the envelope on the desk behind the book
+        envelope.classList.remove("opening");
+        return;
+      }
       renderLetter(key);
       overlay.classList.add("open");
       overlay.setAttribute("aria-hidden", "false");

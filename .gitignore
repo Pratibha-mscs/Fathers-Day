@@ -4,3 +4,5 @@ package-lock.json
 *.png
 shot.js
 dbg.js
+shotbook.js
+sbcheck*.js
