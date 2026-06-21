@@ -29,10 +29,10 @@ body.sb-locked { overflow: hidden; }
   background:
     repeating-linear-gradient(
       90deg,
-      #6b1926 0px, #6b1926 28px,
-      #7f2233 29px, #e9b4c6 32px,
-      #f3d3df 48px, #e9b4c6 64px,
-      #7f2233 67px, #6b1926 68px, #6b1926 96px
+      #6b1926 0px, #6b1926 14px,
+      #7f2233 15px, #e9b4c6 18px,
+      #f3d3df 48px, #e9b4c6 78px,
+      #7f2233 81px, #6b1926 82px, #6b1926 96px
     );
   background-size: 96px 100%;
   filter: saturate(0.9) brightness(0.96);
