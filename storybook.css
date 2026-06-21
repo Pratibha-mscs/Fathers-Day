@@ -90,8 +90,8 @@ body.sb-locked { overflow: hidden; }
 .sb-photos { position: absolute; inset: 0; z-index: 7; pointer-events: none; }
 .sb-photo {
   position: absolute;
-  width: clamp(112px, 11vw, 152px);
-  padding: 9px 9px 32px;
+  width: clamp(102px, 9.4vw, 132px);
+  padding: 8px 8px 28px;
   background: linear-gradient(180deg, #fffefa 0%, #f4ebd7 100%);
   border-radius: 3px;
   box-shadow: 0 12px 26px -6px rgba(20,10,14,0.5), 0 3px 8px rgba(20,10,14,0.3);
@@ -100,6 +100,18 @@ body.sb-locked { overflow: hidden; }
   animation: sb-sway 6.5s ease-in-out infinite;
   transition: translate 0.25s ease-out;
   will-change: transform, translate;
+}
+/* a playful sticker peeking off the corner */
+.sb-photo-sticker {
+  position: absolute;
+  bottom: -12px; right: -12px;
+  font-size: 1.55rem;
+  transform: rotate(14deg);
+  filter: drop-shadow(0 2px 3px rgba(40,20,25,0.32));
+}
+.sb-photo:nth-child(even) .sb-photo-sticker {
+  right: auto; left: -12px;
+  transform: rotate(-14deg);
 }
 .sb-photo img {
   display: block;
@@ -118,17 +130,28 @@ body.sb-locked { overflow: hidden; }
   font-size: 1.05rem;
   color: var(--ink, #4a2f2a);
 }
-/* washi tape across the top of each polaroid */
+/* washi tape — quirky, alternating placement per photo */
 .sb-photo::before {
   content: "";
   position: absolute;
   top: -9px; left: 50%;
-  width: 58px; height: 20px;
-  transform: translateX(-50%) rotate(-3deg);
+  width: 56px; height: 19px;
+  transform: translateX(-50%) rotate(-5deg);
   background: rgba(246,214,225,0.6);
   border-left: 1px dashed rgba(255,255,255,0.6);
   border-right: 1px dashed rgba(255,255,255,0.6);
   box-shadow: 0 2px 4px rgba(40,20,25,0.18);
+}
+/* every other one gets a diagonal corner tape in butter yellow instead */
+.sb-photo:nth-child(even)::before {
+  top: -10px; left: -12px;
+  width: 50px; height: 18px;
+  transform: rotate(-42deg);
+  background: rgba(255,237,173,0.62);
+}
+.sb-photo:nth-child(3n)::before {
+  transform: translateX(-50%) rotate(6deg);
+  background: rgba(200,217,236,0.58);
 }
 @keyframes sb-sway {
   0%, 100% { transform: rotate(var(--r, 0deg)); }

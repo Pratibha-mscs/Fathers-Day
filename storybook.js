@@ -403,11 +403,16 @@
     }
   ];
 
-  /* The 3 New York photos for Pratibha's book. Replace photos/p1..p3.jpg. */
+  /* Pratibha's New York photos, pinned up quirky-scrapbook style.
+     Replace photos/p1..p7.jpg. Each can carry a little corner sticker. */
   const PRATIBHA_PHOTOS = [
-    { src: "photos/p1.jpg", cap: "you & me, NYC ✿",     top: "14%", left: "3%",  rot: -6 },
-    { src: "photos/p2.jpg", cap: "all of us, golden hour", top: "64%", left: "3%", rot: 5 },
-    { src: "photos/p3.jpg", cap: "you two, always",      top: "40%", left: "85%", rot: 6 }
+    { src: "photos/p1.jpg", cap: "you & me, NYC ✿",        top: "7%",  left: "3.5%", rot: -9, sticker: "💛" },
+    { src: "photos/p2.jpg", cap: "golden hour, all of us",  top: "32%", left: "1.5%", rot:  6, sticker: "🌇" },
+    { src: "photos/p3.jpg", cap: "you two, always 💕",       top: "56%", left: "4%",  rot: -5, sticker: "🌉" },
+    { src: "photos/p4.jpg", cap: "caught in the mirror 🪞",  top: "79%", left: "2%",  rot:  8, sticker: "😚" },
+    { src: "photos/p5.jpg", cap: "soaked at Niagara 💦",     top: "13%", left: "85%", rot: -11, sticker: "🌊" },
+    { src: "photos/p6.jpg", cap: "Times Square, 3 a.m. ✨",  top: "41%", left: "86%", rot:  7, sticker: "😛" },
+    { src: "photos/p7.jpg", cap: "top of the world 🗽",      top: "68%", left: "84%", rot: -6, sticker: "✨" }
   ];
 
   /* ------------------------------------------------------------
@@ -560,6 +565,15 @@
 
       fig.appendChild(img);
       fig.appendChild(cap);
+
+      // a quirky little sticker peeking off the corner
+      if (ph.sticker) {
+        const st = document.createElement("span");
+        st.className = "sb-photo-sticker";
+        st.textContent = ph.sticker;
+        fig.appendChild(st);
+      }
+
       photosEl.appendChild(fig);
     });
   }
