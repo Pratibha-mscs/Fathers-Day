@@ -11,7 +11,7 @@
      Each chapter becomes a themed title page followed by as many
      gently-paginated story pages as the prose needs.
   ------------------------------------------------------------ */
-  const CHAPTERS = [
+  const ANJALEE_CHAPTERS = [
     {
       emoji: "🦋",
       title: "Before I Knew What Love Looked Like",
@@ -322,16 +322,116 @@
     }
   ];
 
-  /* Family photos pinned as polaroids around the book.
-     Drop your images into a /photos folder using these file names.
-     Captions are easy to edit here. */
-  const PHOTOS = [
+  /* Family photos pinned as polaroids around Anjalee's book.
+     Drop your images into the /photos folder using these file names. */
+  const ANJALEE_PHOTOS = [
     { src: "photos/1.jpg", cap: "you & me ✿",        top: "12%", left: "3%",  rot: -7 },
     { src: "photos/2.jpg", cap: "all of us, home",   top: "41%", left: "1.5%", rot:  5 },
     { src: "photos/3.jpg", cap: "where it began",    top: "69%", left: "4%",   rot: -4 },
     { src: "photos/4.jpg", cap: "the mountain days", top: "17%", left: "85%",  rot:  6 },
     { src: "photos/5.jpg", cap: "still going ✦",      top: "63%", left: "84%",  rot: -6 }
   ];
+
+  /* ------------------------------------------------------------
+     PRATIBHA'S LETTER
+  ------------------------------------------------------------ */
+  const PRATIBHA_CHAPTERS = [
+    {
+      emoji: "🙏",
+      title: "Namaste, Papa Ji",
+      subtitle: "I don't say this often — but I want you to know.",
+      theme: "love",
+      hidden: [
+        { icon: "💗", note: "love & respect" },
+        { icon: "🙏", note: "for you & Mummy" }
+      ],
+      lines: [
+        "Namaste Papa Ji,",
+        "I don't say this often, but I want you to know how much I love and respect you.",
+        "As I grow older, I realize more and more how much you and Mummy have sacrificed for me.",
+        "Every opportunity I have today, every achievement, and every step forward in my life is because of the countless sacrifices, hard work, and love that both of you have given — expecting only our growth in return."
+      ]
+    },
+    {
+      emoji: "🌟",
+      title: "The Confidence You Gave Me",
+      subtitle: "A lot of my courage began as yours.",
+      theme: "proud",
+      hidden: [
+        { icon: "🌟", note: "you never doubted me" },
+        { icon: "✨", note: "your faith, my strength" }
+      ],
+      lines: [
+        "One thing I have realized over the years is that a lot of the confidence I have in myself comes from the confidence you have always had in me.",
+        "There were many times when I doubted myself, but you never did.",
+        "Your faith in me made me believe that I was capable of achieving more than I thought possible.",
+        "Whenever I take a step forward, a part of that courage comes from knowing that you trust me and believe in me.",
+        "You always supported my dreams and stood by my decisions, even when the path was uncertain. Your trust gave me strength, and your encouragement gave me the confidence to keep going.",
+        "Whenever life felt difficult, knowing that you stood behind me made everything seem possible."
+      ]
+    },
+    {
+      emoji: "✈️",
+      title: "So Far From Home",
+      subtitle: "Distance only made me appreciate you more.",
+      theme: "sunset",
+      hidden: [
+        { icon: "✈️", note: "miles away" },
+        { icon: "🌉", note: "still close at heart" }
+      ],
+      lines: [
+        "Coming so far from home has made me appreciate you even more.",
+        "I now understand that behind every success of mine are years of your struggles, responsibilities, and silent sacrifices.",
+        "No matter how much I achieve, I know I can never truly repay everything you have done for me.",
+        "But I hope that one day I can make you as proud as you have always made me feel supported."
+      ]
+    },
+    {
+      emoji: "🌻",
+      title: "Thank You, Papa Ji",
+      subtitle: "Your trust and blessings mean everything.",
+      theme: "lessons",
+      hidden: [
+        { icon: "🌻", note: "our happiness first" },
+        { icon: "💛", note: "the best father" }
+      ],
+      lines: [
+        "Thank you for always putting our happiness before your own.",
+        "For working hard to give us a better life, and for being the kind of father anyone would be lucky to have.",
+        "Your trust and blessings mean more to me than anything else."
+      ]
+    }
+  ];
+
+  /* The 3 New York photos for Pratibha's book. Replace photos/p1..p3.jpg. */
+  const PRATIBHA_PHOTOS = [
+    { src: "photos/p1.jpg", cap: "you & me, NYC ✿",     top: "14%", left: "3%",  rot: -6 },
+    { src: "photos/p2.jpg", cap: "all of us, golden hour", top: "64%", left: "3%", rot: 5 },
+    { src: "photos/p3.jpg", cap: "you two, always",      top: "40%", left: "85%", rot: 6 }
+  ];
+
+  /* ------------------------------------------------------------
+     BOOKS — each envelope can open its own keepsake.
+  ------------------------------------------------------------ */
+  const BOOKS = {
+    anjalee: {
+      chapters: ANJALEE_CHAPTERS,
+      photos: ANJALEE_PHOTOS,
+      cover: { kicker: "a memory book", title: "For Papa", seal: "A", by: "written, in secret, by Anjalee", theme: "love" },
+      closing: { lines: ["I love you.", "Always."], sign: "Your daughter,", name: "Anjalee", seal: "❤", theme: "yes" }
+    },
+    pratibha: {
+      chapters: PRATIBHA_CHAPTERS,
+      photos: PRATIBHA_PHOTOS,
+      cover: { kicker: "a letter from the heart", title: "For Papa Ji", seal: "P", by: "with all my love, Pratibha", theme: "love" },
+      closing: {
+        lines: ["I love you, Papa Ji.", "Forever grateful — for everything you and Mummy have done.", "I hope I can always make you proud."],
+        sign: "Love always,", name: "Pratibha", seal: "❤", theme: "yes"
+      }
+    }
+  };
+
+  let currentBook = BOOKS.anjalee;
 
   /* universal slow-floating scrapbook objects, present on every page */
   const BASE_FLOATIES = ["⭐", "🦋", "✨", "🌼", "🎀", "☁️", "💌", "🌷", "📸", "🎈"];
@@ -439,7 +539,7 @@
   /* taped polaroids of family photos scattered around the book */
   function buildPhotos() {
     photosEl.innerHTML = "";
-    PHOTOS.forEach(function (ph, i) {
+    currentBook.photos.forEach(function (ph, i) {
       const fig = document.createElement("figure");
       fig.className = "sb-photo";
       fig.style.top = ph.top;
@@ -477,7 +577,7 @@
     measurer.style.height = pageEl.clientHeight + "px";
     const limit = pageEl.clientHeight;
 
-    CHAPTERS.forEach(function (ch, ci) {
+    currentBook.chapters.forEach(function (ch, ci) {
       pages.push({ type: "title", ch: ch, ci: ci });
 
       measurer.className = "sb-measurer sb-page sb-page--content";
@@ -532,16 +632,17 @@
 
     if (page.type === "cover") {
       pageEl.classList.add("sb-page--cover");
+      const cv = currentBook.cover;
       html =
         '<div class="sb-cover">' +
           '<span class="sb-cover-stamp">📮</span>' +
-          '<p class="sb-cover-kicker">a memory book</p>' +
-          '<h2 class="sb-cover-title">For Papa</h2>' +
-          '<div class="sb-cover-seal">A</div>' +
-          '<p class="sb-cover-by">written, in secret, by Anjalee</p>' +
+          '<p class="sb-cover-kicker">' + cv.kicker + '</p>' +
+          '<h2 class="sb-cover-title">' + cv.title + '</h2>' +
+          '<div class="sb-cover-seal">' + cv.seal + '</div>' +
+          '<p class="sb-cover-by">' + cv.by + '</p>' +
           '<p class="sb-cover-hint">turn the page →</p>' +
         '</div>';
-      setTheme("love");
+      setTheme(cv.theme || "love");
     } else if (page.type === "title") {
       pageEl.classList.add("sb-page--title");
       html =
@@ -564,16 +665,20 @@
       setTheme(page.ch.theme);
     } else if (page.type === "closing") {
       pageEl.classList.add("sb-page--closing");
+      const cl = currentBook.closing;
+      const lines = cl.lines.map(function (ln, k) {
+        return '<p class="sb-closing-line' + (k === cl.lines.length - 1 ? ' sb-closing-em' : '') +
+          '">' + escapeHtml(ln) + '</p>';
+      }).join("");
       html =
         '<div class="sb-closing">' +
-          '<p class="sb-closing-line">I love you.</p>' +
-          '<p class="sb-closing-line sb-closing-em">Always.</p>' +
-          '<p class="sb-closing-sign">Your daughter,</p>' +
-          '<p class="sb-closing-name">Anjalee</p>' +
-          '<div class="sb-cover-seal sb-closing-seal">❤</div>' +
+          lines +
+          '<p class="sb-closing-sign">' + cl.sign + '</p>' +
+          '<p class="sb-closing-name">' + cl.name + '</p>' +
+          '<div class="sb-cover-seal sb-closing-seal">' + cl.seal + '</div>' +
           '<button class="sb-finish" type="button">close the book</button>' +
         '</div>';
-      setTheme("yes");
+      setTheme(cl.theme || "yes");
       setHidden([]);
     }
 
@@ -587,7 +692,7 @@
   }
 
   function updateChrome(page) {
-    const total = CHAPTERS.length;
+    const total = currentBook.chapters.length;
     if (page.type === "cover") {
       progressEl.textContent = "✦ open when you're ready ✦";
     } else if (page.type === "closing") {
@@ -729,8 +834,11 @@
   /* ------------------------------------------------------------
      Open / close
   ------------------------------------------------------------ */
-  function open() {
+  function open(bookKey) {
     if (!built) build();
+    currentBook = BOOKS[bookKey] || BOOKS.anjalee;
+    root.dataset.theme = "";          // force theme refresh for the new book
+    buildPhotos();                    // swap in this book's photos
     root.setAttribute("aria-hidden", "false");
     document.body.classList.add("sb-locked");
 
