@@ -99,8 +99,8 @@
     // Let the envelope physically open and the letter peek out first.
     const delay = prefersReduced ? 0 : 520;
     window.setTimeout(function () {
-      // Anjalee's and Pratibha's letters unfold into immersive memory storybooks.
-      if ((key === "anjalee" || key === "pratibha") && window.Storybook) {
+      // All three letters now unfold into immersive memory storybooks.
+      if ((key === "anjalee" || key === "pratibha" || key === "bhaskar") && window.Storybook) {
         window.Storybook.open(key);
         // re-seal the envelope on the desk behind the book
         envelope.classList.remove("opening");

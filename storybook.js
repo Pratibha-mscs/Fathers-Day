@@ -419,6 +419,69 @@
   ];
 
   /* ------------------------------------------------------------
+     BHASKAR'S LETTER
+  ------------------------------------------------------------ */
+  const BHASKAR_CHAPTERS = [
+    {
+      emoji: "🎲",
+      title: "Our Little Moments",
+      subtitle: "Ludo wars, Fun City, and every excuse to be together.",
+      theme: "love",
+      hidden: [
+        { icon: "🎲", note: "Ludo champions 🏆" },
+        { icon: "🎢", note: "extra time at Fun City" },
+        { icon: "✈️", note: "any excuse to visit" }
+      ],
+      lines: [
+        "Happy Father's Day, Dad! 🎉",
+        "Some of my favorite memories are the little moments we've shared together. 💫",
+        "I'll never forget how we used to team up against Mom in Ludo 🎲 — driving her crazy while we happily took all her money 💰 and celebrated every win like it was a world championship. 🏆",
+        "I also remember when Mom and I would visit the UAE 🕌, and I'd always try to convince you to let me spend extra time playing in Fun City 🎢 — and somehow you almost always gave in. 😄",
+        "And then there were all those times when I'd desperately try to come up with reasons for you to call me over to the UAE ✈️, even when there really wasn't any reason at all.",
+        "Yet somehow, you still found a way to bring me there. 💛",
+        "Looking back, I realize it wasn't about the excuses I made — it was about how much you wanted us to spend time together. 🤍"
+      ]
+    },
+    {
+      emoji: "💪",
+      title: "Everything You Carried",
+      subtitle: "The sacrifices that so often went unnoticed.",
+      theme: "tickets",
+      hidden: [
+        { icon: "⏳", note: "the long hours" },
+        { icon: "🤫", note: "you never let it show" },
+        { icon: "❤️", note: "us, before yourself" }
+      ],
+      lines: [
+        "As I've grown older, I've started to understand just how much you've done for our family. 🌱",
+        "There are so many sacrifices you've made that often go unnoticed — the long hours ⏳, the responsibilities, the stress you carried without ever letting it affect us. 💪",
+        "You worked hard to give us opportunities, comfort, and experiences that many people can only dream of. ✨",
+        "No matter how difficult things may have been, you always put our happiness and well-being before your own. ❤️",
+        "The older I get, the more I realize that everything I have today is built on the foundation of your hard work, dedication, and love. 🙏"
+      ]
+    },
+    {
+      emoji: "🙏",
+      title: "Thank You, Dad",
+      subtitle: "For believing in me, always.",
+      theme: "proud",
+      hidden: [
+        { icon: "🌟", note: "someone I look up to" },
+        { icon: "💪", note: "strong, responsible, caring" },
+        { icon: "🤍", note: "grateful, always" }
+      ],
+      lines: [
+        "I am incredibly grateful for every sacrifice you've made, every lesson you've taught me, and every moment you've spent supporting me. 🌟",
+        "Thank you for always believing in me 💛, for being someone I can look up to, and for showing me what it means to be strong, responsible, and caring. 💪",
+        "I may not say it often enough, but I truly appreciate everything you've done and continue to do for our family. 🤍"
+      ]
+    }
+  ];
+
+  /* No photos uploaded for Bhaskar's book yet — frames stay empty. */
+  const BHASKAR_PHOTOS = [];
+
+  /* ------------------------------------------------------------
      BOOKS — each envelope can open its own keepsake.
   ------------------------------------------------------------ */
   const BOOKS = {
@@ -435,6 +498,15 @@
       closing: {
         lines: ["I love you, Papa Ji.", "Forever grateful — for everything you and Mummy have done.", "I hope I can always make you proud."],
         sign: "Love always,", name: "Pratibha", seal: "❤", theme: "yes"
+      }
+    },
+    bhaskar: {
+      chapters: BHASKAR_CHAPTERS,
+      photos: BHASKAR_PHOTOS,
+      cover: { kicker: "a letter for you", title: "For Dad", seal: "B", by: "from your son, Bhaskar", theme: "love" },
+      closing: {
+        lines: ["Happy Father's Day, Dad! 🎉", "Thank you — for everything."],
+        sign: "With all my love,", name: "Bhaskar", seal: "❤", theme: "yes"
       }
     }
   };
