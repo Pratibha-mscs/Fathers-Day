@@ -325,11 +325,14 @@
   /* Family photos pinned as polaroids around Anjalee's book.
      Drop your images into the /photos folder using these file names. */
   const ANJALEE_PHOTOS = [
-    { src: "photos/1.jpg", cap: "you & me ✿",        top: "12%", left: "3%",  rot: -7 },
-    { src: "photos/2.jpg", cap: "all of us, home",   top: "41%", left: "1.5%", rot:  5 },
-    { src: "photos/3.jpg", cap: "where it began",    top: "69%", left: "4%",   rot: -4 },
-    { src: "photos/4.jpg", cap: "the mountain days", top: "17%", left: "85%",  rot:  6 },
-    { src: "photos/5.jpg", cap: "still going ✦",      top: "63%", left: "84%",  rot: -6 }
+    { src: "photos/1.jpg", cap: "you & me ✿",        top: "6%",  left: "3.5%", rot: -8, sticker: "💛" },
+    { src: "photos/2.jpg", cap: "all of us, home",   top: "30%", left: "2%",   rot:  5, sticker: "🪔" },
+    { src: "photos/3.jpg", cap: "where it began",    top: "54%", left: "4%",   rot: -5, sticker: "🌸" },
+    { src: "photos/4.jpg", cap: "the mountain days", top: "78%", left: "2.5%", rot:  7, sticker: "🏔️" },
+    { src: "photos/5.jpg", cap: "still going ✦",      top: "9%",  left: "85%",  rot: -7, sticker: "✨" },
+    { src: "photos/6.jpg", cap: "the river days 🏞️",  top: "33%", left: "86%",  rot:  6, sticker: "🌊" },
+    { src: "photos/7.jpg", cap: "feasts together 🍛", top: "57%", left: "84%",  rot: -6, sticker: "😋" },
+    { src: "photos/8.jpg", cap: "always exploring 🏁", top: "79%", left: "85%",  rot:  8, sticker: "🧭" }
   ];
 
   /* ------------------------------------------------------------
